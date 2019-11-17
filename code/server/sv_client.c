@@ -1541,6 +1541,10 @@ void SV_ClientThink (client_t *cl, usercmd_t *cmd) {
 			ps->stats[0] = ps->stats[6] * 300;
 	}
 
+	if (sv_forceGear && Q_stricmp(sv_forceGear->string, "null")) {
+		Info_SetValueForKey(cl->userinfo, "gear", sv_forceGear->string);
+	}
+
 	VM_Call( gvm, GAME_CLIENT_THINK, cl - svs.clients );
 }
 
