@@ -69,6 +69,9 @@ cvar_t	*sv_authServerIP;
 cvar_t  *sv_auth_engine;
 #endif
 
+cvar_t *sv_infiniteStamina;
+cvar_t *sv_noFallDamage;
+
 /*
 =============================================================================
 
