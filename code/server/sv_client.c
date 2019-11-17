@@ -1528,10 +1528,17 @@ Also called by bot code
 ==================
 */
 void SV_ClientThink (client_t *cl, usercmd_t *cmd) {
+
+	playerState_t *ps = NULL;
+	ps = SV_GameClientNum(cl - svs.clients);
 	cl->lastUsercmd = *cmd;
 
 	if ( cl->state != CS_ACTIVE ) {
 		return;		// may have been kicked during the last usercmd
+	}
+
+	if (  sv_infiniteStamina->integer  ) {
+			ps->stats[0] = ps->stats[6] * 300;
 	}
 
 	VM_Call( gvm, GAME_CLIENT_THINK, cl - svs.clients );
