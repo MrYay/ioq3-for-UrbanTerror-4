@@ -940,6 +940,7 @@ void SV_Init (void) {
 	sv_auth_engine = Cvar_Get("sv_auth_engine", "1", CVAR_ROM);
 	#endif
 	
+	sv_forceGear = Cvar_Get("sv_forceGear", "", CVAR_ARCHIVE);
 	// initialize bot cvars so they are listed and can be set before loading the botlib
 	SV_BotInitCvars();
 
