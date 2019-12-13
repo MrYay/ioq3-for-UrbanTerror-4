@@ -1,0 +1,16 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - forcegear
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: make
+      run: make
