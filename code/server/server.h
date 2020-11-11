@@ -314,6 +314,7 @@ extern  cvar_t  *sv_auth_engine;
 extern cvar_t *sv_infiniteStamina;
 extern cvar_t *sv_noFallDamage;
 extern cvar_t *sv_forceGear;
+extern cvar_t *sv_noBroadcast;
 
 //===========================================================
 

@@ -72,6 +72,7 @@ cvar_t  *sv_auth_engine;
 cvar_t *sv_infiniteStamina;
 cvar_t *sv_noFallDamage;
 cvar_t *sv_forceGear;
+cvar_t *sv_noBroadcast;
 
 /*
 =============================================================================
@@ -203,6 +204,11 @@ void QDECL SV_SendServerCommand(client_t *cl, const char *fmt, ...) {
 	if ( strlen ((char *)message) > 1022 ) {
 		return;
 	}
+
+	if ( !Q_strncmp((char *) message, "print \"Server: \"",14) && sv_noBroadcast ) {
+            Com_Printf ("(sv_noBroadcast = 1, not sending to clients)\n");
+        	return;
+    	}
 
 	if ( cl != NULL ) {
 		SV_AddServerCommand( cl, (char *)message );
