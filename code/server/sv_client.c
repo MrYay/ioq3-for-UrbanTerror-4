@@ -1340,7 +1340,7 @@ void SV_UpdateUserinfo_f( client_t *cl ) {
 
 	Q_strncpyz( cl->userinfo, Cmd_Argv(1), sizeof(cl->userinfo) );
 
-	if (sv_forceGear && Q_stricmp(sv_forceGear->string, "null")) {
+	if (sv_forceGear && Q_stricmp(sv_forceGear->string, "")) {
 		Info_SetValueForKey(cl->userinfo, "gear", sv_forceGear->string);
 	}
 
@@ -1545,7 +1545,7 @@ void SV_ClientThink (client_t *cl, usercmd_t *cmd) {
 			ps->stats[0] = ps->stats[6] * 300;
 	}
 
-	if (sv_forceGear && Q_stricmp(sv_forceGear->string, "null")) {
+	if (sv_forceGear && Q_stricmp(sv_forceGear->string, "")) {
 		Info_SetValueForKey(cl->userinfo, "gear", sv_forceGear->string);
 	}
 
