@@ -1346,18 +1346,18 @@ static void SV_NameServerDemo(char *filename, int length, const client_t *client
     } else {
         #ifdef USE_DEMO_FORMAT_42
             Q_snprintf(
-                filename, length-1, "%s/%.4d-%.2d-%.2d_%.2d-%.2d-%.2d_%s_%d.urtdemo",
+                filename, length-1, "%s/%.4d-%.2d-%.2d_%.2d-%.2d-%.2d_%s__%s_%d.urtdemo",
                 sv_demofolder->string, time.tm_year+1900, time.tm_mon + 1, time.tm_mday,
                 time.tm_hour, time.tm_min, time.tm_sec,
-                playername,
+                playername, sv_mapname->string,
                 Sys_Milliseconds()
             );
         #else
             Q_snprintf(
-                filename, length-1, "%s/%.4d-%.2d-%.2d_%.2d-%.2d-%.2d_%s_%d.dm_%d",
+                filename, length-1, "%s/%.4d-%.2d-%.2d_%.2d-%.2d-%.2d_%s__%s_%d.dm_%d",
                 sv_demofolder->string, time.tm_year+1900, time.tm_mon + 1, time.tm_mday,
                 time.tm_hour, time.tm_min, time.tm_sec,
-                playername,
+                playername, sv_mapname->string,
                 Sys_Milliseconds(),
                 PROTOCOL_VERSION
             );
@@ -1371,7 +1371,7 @@ static void SV_NameServerDemo(char *filename, int length, const client_t *client
     }
 }
 
-static void SV_StartRecordOne(client_t *client, char *filename) {
+void SV_StartRecordOne(client_t *client, char *filename) {
 
     char path[MAX_OSPATH];
 

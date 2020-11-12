@@ -315,6 +315,7 @@ extern cvar_t *sv_infiniteStamina;
 extern cvar_t *sv_noFallDamage;
 extern cvar_t *sv_forceGear;
 extern cvar_t *sv_noBroadcast;
+extern cvar_t *sv_autoRecordDemo;
 
 //===========================================================
 
@@ -379,6 +380,7 @@ void SV_WriteDownloadToClient( client_t *cl , msg_t *msg );
 //
 void SV_Heartbeat_f( void );
 void SVD_WriteDemoFile(const client_t*, const msg_t*);
+void SV_StartRecordOne(client_t *client, char *filename);
 
 //
 // sv_snapshot.c

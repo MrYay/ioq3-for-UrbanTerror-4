@@ -944,6 +944,7 @@ void SV_Init (void) {
 	sv_noFallDamage = Cvar_Get ("sv_noFallDamage", "0", CVAR_ARCHIVE );
 	sv_forceGear = Cvar_Get ("sv_forceGear", "", CVAR_ARCHIVE );
 	sv_noBroadcast = Cvar_Get ("sv_noBroadcast", "0", CVAR_ARCHIVE );
+	sv_autoRecordDemo = Cvar_Get ("sv_autoRecordDemo", "0", CVAR_ARCHIVE );
 	// initialize bot cvars so they are listed and can be set before loading the botlib
 	SV_BotInitCvars();
 

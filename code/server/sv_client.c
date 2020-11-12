@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "server.h"
 
 static void SV_CloseDownload( client_t *cl );
+cvar_t *sv_autoRecordDemo;
 
 /*
 =================
@@ -716,6 +717,10 @@ void SV_ClientEnterWorld( client_t *client, usercmd_t *cmd ) {
 	} else {
 		memset(&client->lastUsercmd, '\0', sizeof(client->lastUsercmd));
 	}
+
+    if (sv_autoRecordDemo->integer) {
+        SV_StartRecordOne(client, NULL);
+    }
 
 	// call the game begin function
 	VM_Call( gvm, GAME_CLIENT_BEGIN, client - svs.clients );
