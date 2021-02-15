@@ -1,0 +1,27 @@
+name: fgt_server_linux64
+on:
+  push:
+    branches: [ fgt ]
+
+jobs:
+
+  build-server-linux64:
+    name: Linux64 server build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          make BUILD_SERVER=1 BUILD_CLIENT=0 USE_SDL=0
+      - name: Setting variables
+        id: vars
+        shell: bash
+        run: |
+          echo "::set-output name=date::$(echo '${{ github.event.head_commit.timestamp }}' | sed 's/T/-/;s/://g' | cut -f1 -d '+')"
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ioq3urt-fgt-linux64-${{ steps.vars.outputs.date }}
+          artifacts: "${{ github.workspace }}/build/release-linux-x86_64/*.x86_64"
+          token: ${{ secrets.GITHUB_TOKEN }}
