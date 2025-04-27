@@ -73,6 +73,7 @@ cvar_t *sv_infiniteStamina;
 cvar_t *sv_noFallDamage;
 cvar_t *sv_forceGear;
 cvar_t *sv_noBroadcast;
+cvar_t *sv_autoTeamChatOnDeath;
 
 /*
 =============================================================================

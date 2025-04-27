@@ -297,6 +297,37 @@ void SV_GetUsercmd( int clientNum, usercmd_t *cmd ) {
 	*cmd = svs.clients[clientNum].lastUsercmd;
 }
 
+
+/*
+===============
+SV_GPrintHook
+
+===============
+*/
+void SV_GPrintHook( const char* arg ) {
+    int val[3];
+    char cmd[MAX_NAME_LENGTH];
+    char msg[MAX_STRING_CHARS];
+    playerState_t *ps1 = NULL;
+    playerState_t *ps2 = NULL;
+
+    sscanf(arg, "%s %i %i %i", cmd, &val[0], &val[1], &val[2]);
+
+    // Send remaining health of enemy attacker in teamchat when dying
+    if(sv_autoTeamChatOnDeath->integer) {
+        if (!Q_stricmp("Kill:", cmd)) {
+            ps1 = SV_GameClientNum(val[0]);
+            ps2 = SV_GameClientNum(val[1]);
+            if(ps1->persistant[PERS_TEAM] != ps2->persistant[PERS_TEAM]) {
+                Com_sprintf(msg, sizeof(msg),
+                            va("say_team %s had %ihp left.", svs.clients[val[0]].name, ps1->stats[6]));
+                Cmd_TokenizeString(msg);
+                VM_Call(gvm, GAME_CLIENT_COMMAND, val[1]);
+            }
+        }
+    }
+}
+
 //==============================================
 
 static int	FloatAsInt( float f ) {
@@ -320,6 +351,7 @@ The module is making a system call
 intptr_t SV_GameSystemCalls( intptr_t *args ) {
 	switch( args[0] ) {
 	case G_PRINT:
+		SV_GPrintHook( (const char*)VMA(1) );
 		Com_Printf( "%s", (const char*)VMA(1) );
 		return 0;
 	case G_ERROR:
