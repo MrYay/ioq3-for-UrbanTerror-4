@@ -316,6 +316,7 @@ extern cvar_t *sv_noFallDamage;
 extern cvar_t *sv_forceGear;
 extern cvar_t *sv_noBroadcast;
 extern cvar_t *sv_autoRecordDemo;
+extern cvar_t *sv_autoTeamChatOnDeath;
 
 //===========================================================
 
